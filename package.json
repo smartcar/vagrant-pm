@@ -1,0 +1,10 @@
+{
+  "name": "vagrant-pm",
+  "version": "0.0.1",
+  "description": "Run npm prefixed to another directory.",
+  "bin": {
+    "vpm": "vpm"
+  },
+  "author": "Smartcar",
+  "license": "MIT"
+}

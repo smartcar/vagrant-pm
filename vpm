@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+MODULES_PATH=${VPM_MODULES_PATH:-"$HOME/.vagrant_modules"}
+MODULES_PREFIX="$MODULES_PATH/$(basename $(pwd))"
+LOCAL_PACKAGE="$(pwd)/package.json"
+
+mkdir -p $MODULES_PREFIX
+cp $LOCAL_PACKAGE $MODULES_PREFIX
+npm --prefix=$MODULES_PREFIX $@
