@@ -1,6 +1,6 @@
 {
   "name": "vagrant-pm",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Create symlinks for easy use of npm in Vagrant synced folders.",
   "bin": {
     "vpm": "vpm"
