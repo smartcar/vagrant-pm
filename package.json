@@ -1,7 +1,7 @@
 {
   "name": "vagrant-pm",
-  "version": "0.0.2",
-  "description": "Run npm prefixed to another directory.",
+  "version": "0.0.3",
+  "description": "Create symlinks for easy use of npm in Vagrant synced folders.",
   "bin": {
     "vpm": "vpm"
   },

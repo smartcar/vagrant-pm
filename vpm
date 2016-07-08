@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
 
+# Location of all vpm modules
 MODULES_PATH=${VPM_MODULES_PATH:-"$HOME/.vagrant_modules"}
-MODULES_PREFIX="$MODULES_PATH/$(basename $(pwd))"
 
+# Path to node_modules
+MODULES_PREFIX="$MODULES_PATH/$(basename $(pwd))"
+PACKAGE_MODULES="$MODULES_PREFIX/node_modules"
+
+# Initialize the symlink
 if test $1 = 'init'; then
-  mkdir -p $MODULES_PREFIX
-  ln -s $MODULES_PREFIX/node_modules node_modules
-  echo "Created link node_modules -> $MODULES_PREFIX/node_modules"
+  mkdir -p $PACKAGE_MODULES
+  ln -s $PACKAGE_MODULES node_modules && \
+  echo "Created link node_modules -> $PACKAGE_MODULES"
+# Delete the contents of the symlink and the symlink itself
+elif test $1 = 'clean'; then
+  rm -rf $MODULES_PREFIX
+  rm -f node_modules
+  echo "Cleaned node_modules."
 fi
