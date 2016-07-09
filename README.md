@@ -1,12 +1,37 @@
 # Vagrant Package Manager
 
 This is not actually a package manager, but rather a helper to make `npm` work
-nicer in shared folders in Vagrant.
+nicer with shared folders in Vagrant.
+
+## Setup Vagrant
+
++ Add a customize line into your `Vagrantfile`:
+
+Replace `<synced folder>` with the path to your synced folder. With a default
+vagrant setup the path would simply be `/vagrant`.
+
+```hcl
+config.vm.provider "virtualbox" do |v|
+  v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/<synced folder>", "1"]
+end
+```
+
++ Run your terminal (Command Prompt, Git Bash, Powershell, ...) in Administrator mode.
+Simply right click on the app icon and select "Run as Administrator". Then setup
+vagrant as normal:
+
+```bash
+$ vagrant up
+...
+$ vagrant ssh
+```
+
+NOTE: Make sure you run `vagrant up` while in Administrator mode.
 
 ## Install
 
 ```bash
-sudo npm install -g vagrant-pm
+$ sudo npm install -g vagrant-pm
 ```
 
 ## Usage
