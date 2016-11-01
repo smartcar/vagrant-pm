@@ -4,17 +4,25 @@
 MODULES_PATH=${VPM_MODULES_PATH:-"$HOME/.vagrant_modules"}
 
 # Path to node_modules
-MODULES_PREFIX="$MODULES_PATH/$(basename $(pwd))"
+PACKAGE_DIR="$(pwd | sed 's/\//-/g' | sed 's/^-//')"
+MODULES_PREFIX="$MODULES_PATH/$PACKAGE_DIR"
 PACKAGE_MODULES="$MODULES_PREFIX/node_modules"
 
-# Initialize the symlink
-if test $1 = 'init'; then
-  mkdir -p $PACKAGE_MODULES
-  ln -sf $PACKAGE_MODULES node_modules && \
-  echo "Created link node_modules -> $PACKAGE_MODULES"
-# Delete the contents of the symlink and the symlink itself
+if test $1 = '-h' || test $1 = '--help' || test $1 = 'help' ; then
+  echo "VPM: Help npm and vagrant play nice.
+
+Usage:
+  vpm init - initialize new symlink
+  vpm clean - clean out the link and the packages
+  vpm help - print out this message"
 elif test $1 = 'clean'; then
+  # Delete the contents of the symlink and the symlink itself
   rm -rf $MODULES_PREFIX
   rm -f node_modules
   echo "Cleaned node_modules."
+else
+  # Initialize the symlink
+  mkdir -p $PACKAGE_MODULES
+  ln -sf $PACKAGE_MODULES node_modules && \
+  echo "Created link node_modules -> $PACKAGE_MODULES"
 fi
